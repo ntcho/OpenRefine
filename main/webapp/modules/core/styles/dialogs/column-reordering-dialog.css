@@ -40,7 +40,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 }
 
 .column-reordering-dialog-column-container {
-  height: 375px;
+  max-height: 80vh;
   border: 1px solid #eee;
   padding: 10px;
   overflow: auto;

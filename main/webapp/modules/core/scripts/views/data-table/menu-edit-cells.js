@@ -402,6 +402,17 @@ DataTableColumnHeaderUI.extendMenu(function(column, columnHeaderUI, menu) {
       icon: 'images/operations/magic-wand.svg',
       submenu: [
         {
+          id: "core/deduplicate",
+          label: $.i18n('core-views/deduplicate/single'),
+          click: function() { new doTextTransform("if(value.indexOf(\"\\n\") > 0, filter(value.split(\"\\n\"), v, v.length() > 0).uniques().join(\"\\n\"),if(value.indexOf(\",\") > 0,filter(value.split(/\\s*,\\s*/), v, v.length() > 0).uniques().join(\", \"),[][1]))", "keep-original", false, ""); }
+        },
+        {
+          id: "core/clean-urls",
+          label: $.i18n('core-views/clean-urls/single'),
+          click: function() { new doTextTransform("if(value.indexOf(\"\\n\") > 0, filter(forEach(value.split(\"\\n\"),v,v.replace(/(?:https?:\\/\\/)?(?:www.)?/, \"\").replace(/\\/$/, \"\")), v, v.length() > 0).join(\"\\n\"),if(value.indexOf(\",\") > 0,filter(forEach(value.split(/\\s*,\\s*/),v,v.replace(/(?:https?:\\/\\/)?(?:www.)?/, \"\").replace(/\\/$/, \"\")), v, v.length() > 0).join(\", \"),value.replace(/(?:https?:\\/\\/)?(?:www.)?/, \"\").replace(/\\/$/, \"\")))", "keep-original", false, ""); }
+        },
+        {},
+        {
           id: "core/trim-whitespace",
           label: $.i18n('core-views/trim-all/single'),
           click: function() { doTextTransform("value.trim()", "keep-original", false, ""); }

@@ -65,6 +65,11 @@ DataTableCellUI.prototype._render = function() {
   var self = this;
   var cell = this._cell;
 
+  this._td.addEventListener('dblclick', function() {
+    self._startEdit(this);
+    self._focusBeforeEdit = editLink;
+  });
+
   var divContent = document.createElement('div');
   divContent.className = 'data-table-cell-content';
 
@@ -94,6 +99,11 @@ DataTableCellUI.prototype._render = function() {
       break;
     }
   }
+
+  this._td.addEventListener('auxclick', function(e) {
+    renderedCell.focus();
+    navigator.clipboard.writeText(renderedCell.innerText);
+  });
 
   if (renderedCell) {
     divContent.appendChild(renderedCell);

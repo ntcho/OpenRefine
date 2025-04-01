@@ -522,7 +522,8 @@ ExpressionPreviewDialog.Widget.prototype._renderPreview = function(expression, d
             if ($.isPlainObject(v)) {
                 $('<span></span>').addClass("expression-preview-special-value").text($.i18n('core-dialogs/error')+": " + v.message).appendTo(td);
             } else {
-                td.text(v);
+                $('<span></span>').text(v).appendTo(td);
+                // td.text(v);
             }
         } else {
             $('<span>null</span>').addClass("expression-preview-special-value").appendTo(td);

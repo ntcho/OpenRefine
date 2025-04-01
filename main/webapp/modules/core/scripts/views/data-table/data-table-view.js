@@ -580,15 +580,17 @@ DataTableView.prototype._renderTableHeader = function(tableHeader, colGroup) {
       // Not set in CSS directly because the user needs to be able to override that by dragging.
       // Set in px rather than in em because with em it can lead to a fractional width in pixels,
       // which causes the right border not to display correctly. 
-      col.css('min-width', '50px');
+      col.css('min-width', '27px');
     }
     if (self._collapsedColumnNames.hasOwnProperty(column.name)) {
       DOM.bind( 
         $(th)
         .attr('title',$.i18n('core-views/expand', column.name))
-        .html("<button class='column-header-menu column-header-menu-expand' bind='expandColumn' ></button>")
-      ).expandColumn.on(
-        'click', function() {
+        .html("<div class='column-header-title'><button class='column-header-menu column-header-menu-expand' bind='expandColumn' ></button></div></div>")
+      );
+      
+      $(th).on(
+        'click auxclick', function() {
           delete self._collapsedColumnNames[column.name];
           self.render();
         }
@@ -781,6 +783,17 @@ DataTableView.prototype._createMenuForAllColumns = function(elmt) {
       id: "core/common-transforms",
       label: $.i18n('core-views/edit-all-columns'),
       submenu: [
+        {
+          id: "core/deduplicate",
+          label: $.i18n('core-views/deduplicate'),
+          click: function() { new commonTransformDialog("if(value.indexOf(\"\\n\") > 0, filter(value.split(\"\\n\"), v, v.length() > 0).uniques().join(\"\\n\"),if(value.indexOf(\",\") > 0,filter(value.split(/\\s*,\\s*/), v, v.length() > 0).uniques().join(\", \"),[][1]))","core-views/deduplicate/header" ); }
+        },
+        {
+          id: "core/clean-urls",
+          label: $.i18n('core-views/clean-urls'),
+          click: function() { new commonTransformDialog("if(value.indexOf(\"\\n\") > 0, filter(forEach(value.split(\"\\n\"),v,v.replace(/(?:https?:\\/\\/)?(?:www.)?/, \"\").replace(/\\/$/, \"\")), v, v.length() > 0).join(\"\\n\"),if(value.indexOf(\",\") > 0,filter(forEach(value.split(/\\s*,\\s*/),v,v.replace(/(?:https?:\\/\\/)?(?:www.)?/, \"\").replace(/\\/$/, \"\")), v, v.length() > 0).join(\", \"),value.replace(/(?:https?:\\/\\/)?(?:www.)?/, \"\").replace(/\\/$/, \"\")))))","core-views/clean-urls/header" ); }
+        },
+        {},
         {
           id: "core/trim-whitespace",
           label: $.i18n('core-views/trim-all'),

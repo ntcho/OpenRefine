@@ -109,7 +109,6 @@ div.viewpanel-pagesize span:first-of-type {
   font-size: 1.05em;
   border-collapse: separate;
   width: max-content;
-  padding-right: 3em;
 }
 
 .data-table td, .data-table-header td, .data-table-header th {
@@ -149,6 +148,10 @@ th {
 .column-header-title {
   overflow: hidden;
   text-overflow: clip;
+  display: flex;
+  gap: 4px;
+  flex-direction: row-reverse;
+  justify-content: space-between;
 }
 
 th .column-header-resizer-left, th .column-header-resizer-right {
@@ -190,7 +193,7 @@ table.data-table-header td.column-header, table.data-table-header th.column-head
 table.data-table td.column-header, table.data-table th.column-header {
   vertical-align: top;
   white-space: nowrap;
-  padding: 4px 6px 4px 4px;
+  padding: 4px;
   border-bottom: none;
   font-weight: bold;
 }
@@ -213,7 +216,7 @@ th.resized-column .column-header-name {
 
 .column-header-menu {
   display: inline-block;
-  margin: 0 4px 0 0;
+  margin: 0 1px;
   width: 17px;
   height: 19px;
   background-image: url(../../images/menu-dropdown.png);

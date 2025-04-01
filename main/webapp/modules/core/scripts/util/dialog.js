@@ -48,6 +48,10 @@ DialogSystem.showDialog = function(elmt, onCancel) {
   .css("z-index", 101 + DialogSystem._layers.length * 2)
   .appendTo(document.body);
 
+  $(overlay).on("click", function() {
+    DialogSystem.dismissUntil(DialogSystem._layers.length - 1);
+  });
+
   var container = $('<div></div>')
   .addClass("dialog-container")
   .css("z-index", 102 + DialogSystem._layers.length * 2)
