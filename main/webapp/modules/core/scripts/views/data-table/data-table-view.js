@@ -94,7 +94,16 @@ DataTableView.resizingState = {
 
 DataTableView.prototype._startResizing = function(columnIndex, clickEvent) {
   var self = this;
-  var columnHeader = self._columnHeaderUIs[columnIndex];
+  var offset = 0;
+
+  // calculate offset
+  for (var i = 0; i < columnIndex && i < theProject.columnModel.columns.length; i++) {
+    if (self._collapsedColumnNames[theProject.columnModel.columns[i].name] == true) {
+      offset++;
+    }
+  }
+
+  var columnHeader = self._columnHeaderUIs[columnIndex - offset];
   clickEvent.preventDefault();
   var state = DataTableView.resizingState;
   state.dragging = true;

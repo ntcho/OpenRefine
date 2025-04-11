@@ -210,9 +210,9 @@ table.data-table td.column-header, table.data-table th.column-header {
   position: initial;
 }
 
-th.resized-column .column-header-name {
+/* th.resized-column .column-header-name {
   position: absolute;
-}
+} */
 
 .column-header-menu {
   display: inline-block;
