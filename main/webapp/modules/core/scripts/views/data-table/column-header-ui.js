@@ -122,7 +122,7 @@ DataTableColumnHeaderUI.prototype._render = function() {
 
   this._td.addEventListener('contextmenu',function(e) {
     e.preventDefault();
-    self._createMenuForColumnHeader(this);
+    self._createMenuForColumnHeader(elmts.dropdownMenu);
   });
 
   this._td.addEventListener('auxclick',function(e) {
