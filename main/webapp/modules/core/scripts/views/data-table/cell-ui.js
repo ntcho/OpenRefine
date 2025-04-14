@@ -100,6 +100,13 @@ DataTableCellUI.prototype._render = function() {
     }
   }
 
+  this._td.addEventListener('click', function(e) {
+    if (e.altKey) {
+      window.open('http://' + renderedCell.innerText, '_blank').focus();
+      return;
+    }
+  });
+
   this._td.addEventListener('auxclick', function(e) {
     renderedCell.focus();
     navigator.clipboard.writeText(renderedCell.innerText);
