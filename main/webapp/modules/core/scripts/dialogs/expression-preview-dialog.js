@@ -150,6 +150,7 @@ ExpressionPreviewDialog.Widget = function(
                 self.update();
             }
 
+            // shortcuts for up and down arrow keys
             if (e.keyCode == 38) {
                 var isCaratAtBeginning = this.selectionStart == 0 && this.selectionEnd == 0;
                 var hasPreviousHistory = self._currentHistoryIndex < self._expressionHistory.length - 1;
@@ -169,6 +170,19 @@ ExpressionPreviewDialog.Widget = function(
                     // find the next expression
                     self._currentHistoryIndex--;
                     setExpression(self._expressionHistory[self._currentHistoryIndex]);
+                }
+            }
+
+            // shortcuts for cmd+enter and ctrl+enter
+            if (e.keyCode == 13 && (e.ctrlKey || e.metaKey)) {
+                var okButton = $(self._elmts.expressionPreviewTextarea[0])
+                    .parents(".dialog-frame") // traverse up to the dialog frame
+                    .find(".dialog-footer").first()
+                    .children(":first-child") // ok button
+
+                // simulate clicking the ok button
+                if (okButton.length) {
+                    okButton.trigger("click");
                 }
             }
         });
